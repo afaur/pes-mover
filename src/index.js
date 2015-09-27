@@ -1,6 +1,53 @@
-diskspace = require('diskspace');
-glob = require('glob');
+var diskspace = require('diskspace');
+var glob = require('glob');
 
+class Platform {
+
+  constructor() {
+    if (/^win/.test(process.platform)) {
+      this.platform = "windows";
+    } else {
+      this.platform = "posix_compliant";
+    }
+  }
+
+}
+
+class FilesFinder extends Platform {
+
+  constructor(loc="D", ext="pes") {
+    super();
+    this.ext = ext;
+    this.loc = loc;
+  }
+
+  find_files() {
+    if (this.platform === "windows") {
+      glob(
+          this.loc + ":\**/*." + this.ext,
+          {},
+          function (er, files) {
+            console.log(files);
+          }
+      );
+    } else {
+      glob(
+          this.loc + "/**/*." + this.ext,
+          {},
+          function (er, files) {
+            console.log(files);
+          }
+      );
+    }
+  }
+
+}
+
+var filesFinder = new FilesFinder("./src", "js");
+
+filesFinder.find_files();
+
+/*
 var CDREADY = false;
 var FLOPPYREADY = false;
 
@@ -56,4 +103,4 @@ if (result.status) {
   console.log('Rerun this application after inserting your CD');
   process.exit();
 }
-
+*/

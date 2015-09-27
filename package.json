@@ -2,14 +2,15 @@
   "name": "adam",
   "version": "1.0.0",
   "description": "Moves pes files to floppy drives",
-  "main": "src/index.js",
+  "main": "./build/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "./compile.sh && node ./build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "adam",
   "license": "MIT",
   "dependencies": {
+    "babel": "^5.8.23",
     "diskspace": "^0.1.7",
     "glob": "^5.0.14"
   }
